@@ -371,7 +371,7 @@ function VideoTile({ stream, name, muted, isLocal, forceCover, isGiadarkitRoom, 
       {/* Video element — always in DOM, never display:none (browsers pause hidden streams) */}
       <video  
         ref={videoRef} 
-        className={`w-full h-full ${isCinematicMain ? '' : 'rounded-3xl'} ${isLocal && !isScreenShare ? '-scale-x-100' : ''} ${isCinematicMain ? 'object-contain' : (forceCover ? 'object-cover' : 'object-contain md:object-cover')} transition-opacity duration-300 ${showVideo ? 'opacity-100' : 'opacity-0'}`} 
+        className={`w-full h-full max-w-full ${isCinematicMain ? '' : 'rounded-3xl'} ${isLocal && !isScreenShare ? '-scale-x-100' : ''} object-cover transition-opacity duration-300 ${showVideo ? 'opacity-100' : 'opacity-0'}`} 
         autoPlay 
         muted={muted}
         playsInline

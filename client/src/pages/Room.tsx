@@ -256,7 +256,8 @@ export default function Room() {
                 blurRadius={blurRadius}
                 onBlurRadiusChange={setBlurRadius}
                 isRecording={isRecording}
-                onToggleRecord={() => toggleRecording(engineLocalStream)}
+                onToggleRecord={() => toggleRecording(engineLocalStream, engine.remotePeers)}
+
                 onEmojiSelect={(emoji: string) => engine.sendReaction(emoji)}
                 onToggleMic={() => engine.toggleAudio()}
                 onToggleVideo={() => engine.toggleVideo()}

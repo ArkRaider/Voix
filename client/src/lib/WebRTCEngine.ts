@@ -59,7 +59,14 @@ export class WebRTCEngine extends EventEmitter<WebRTCEvents> {
   public async initializeMedia(): Promise<MediaStream | null> {
     try {
       console.log('[Step 1: Media Success] Requesting raw camera stream...');
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { 
+          width: { ideal: 1920 }, 
+          height: { ideal: 1080 },
+          frameRate: { ideal: 30 }
+        }, 
+        audio: true 
+      });
       this.currentLocalStream = stream;
       this.emit('localStream', this.currentLocalStream);
       return stream;
@@ -232,6 +239,7 @@ export class WebRTCEngine extends EventEmitter<WebRTCEvents> {
       this.currentLocalStream.getTracks().forEach(track => {
         pc.addTrack(track, this.currentLocalStream!);
       });
+      this._applyBitrateConstraints(pc);
     }
 
     pc.onicecandidate = (event) => {
@@ -449,7 +457,11 @@ export class WebRTCEngine extends EventEmitter<WebRTCEvents> {
       const senders = pc.getSenders();
       if (videoTrack) {
         const vSender = senders.find(s => s.track?.kind === 'video');
-        if (vSender) vSender.replaceTrack(videoTrack).catch(console.error);
+        if (vSender) {
+          vSender.replaceTrack(videoTrack)
+            .then(() => this._applyBitrateConstraints(pc))
+            .catch(console.error);
+        }
       }
       if (audioTrack) {
         const aSender = senders.find(s => s.track?.kind === 'audio');
@@ -643,7 +655,10 @@ export class WebRTCEngine extends EventEmitter<WebRTCEvents> {
       // Must re-acquire a fresh video track
       console.warn('[toggleVideo] Track is ended — re-acquiring via getUserMedia');
       try {
-        const freshStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        const freshStream = await navigator.mediaDevices.getUserMedia({ 
+          video: { width: { ideal: 1920 }, height: { ideal: 1080 } }, 
+          audio: false 
+        });
         const freshTrack = freshStream.getVideoTracks()[0];
 
         // Swap into the local stream
@@ -654,7 +669,11 @@ export class WebRTCEngine extends EventEmitter<WebRTCEvents> {
         this.connections.forEach(pc => {
           const senders = pc.getSenders();
           const vSender = senders.find(s => s.track?.kind === 'video' || s.track === track);
-          if (vSender) vSender.replaceTrack(freshTrack).catch(console.error);
+          if (vSender) {
+            vSender.replaceTrack(freshTrack)
+              .then(() => this._applyBitrateConstraints(pc))
+              .catch(console.error);
+          }
         });
 
         this.isCameraOn = true;
@@ -690,6 +709,24 @@ export class WebRTCEngine extends EventEmitter<WebRTCEvents> {
       this.connections.forEach((_pc, targetId) => {
         this.socket?.emit('chat-fallback', { to: targetId, payload });
       });
+    }
+  }
+
+  private async _applyBitrateConstraints(pc: RTCPeerConnection) {
+    try {
+      const senders = pc.getSenders();
+      const videoSender = senders.find(s => s.track?.kind === 'video');
+      if (videoSender) {
+        const parameters = videoSender.getParameters();
+        if (!parameters.encodings || parameters.encodings.length === 0) {
+          parameters.encodings = [{}];
+        }
+        parameters.encodings[0].maxBitrate = 2500000; // 2.5 Mbps
+        await videoSender.setParameters(parameters);
+        console.log('[Quality Shield] Bitrate forced to 2.5Mbps');
+      }
+    } catch (err) {
+      console.warn('Failed to apply bitrate constraints:', err);
     }
   }
 

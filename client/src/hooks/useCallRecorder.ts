@@ -5,21 +5,56 @@ export function useCallRecorder() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const recordedChunks = useRef<Blob[]>([]);
 
-  const toggleRecording = useCallback((stream: MediaStream | null) => {
+  const toggleRecording = useCallback((localStream: MediaStream | null, remotePeers: Map<string, { stream: MediaStream }> = new Map()) => {
     if (isRecording) {
       if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
         mediaRecorderRef.current.stop();
       }
       setIsRecording(false);
     } else {
-      if (!stream) return;
+      if (!localStream) return;
       
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const destination = audioContext.createMediaStreamDestination();
+      let hasAudio = false;
+
+      // Add local audio
+      if (localStream.getAudioTracks().length > 0) {
+        const localSource = audioContext.createMediaStreamSource(localStream);
+        localSource.connect(destination);
+        hasAudio = true;
+      }
+
+      // Add remote audio
+      remotePeers.forEach(({ stream }) => {
+        if (stream.getAudioTracks().length > 0) {
+          const remoteSource = audioContext.createMediaStreamSource(stream);
+          remoteSource.connect(destination);
+          hasAudio = true;
+        }
+      });
+
+      // Combine video from local with mixed audio
+      const combinedStream = new MediaStream();
+      
+      // Keep local video track
+      const videoTrack = localStream.getVideoTracks()[0];
+      if (videoTrack) combinedStream.addTrack(videoTrack);
+      
+      // Add mixed audio track
+      if (hasAudio) {
+        const mixedAudioTrack = destination.stream.getAudioTracks()[0];
+        if (mixedAudioTrack) combinedStream.addTrack(mixedAudioTrack);
+      } else if (localStream.getAudioTracks()[0]) {
+        // Fallback to local audio if mixing failed but local exists
+        combinedStream.addTrack(localStream.getAudioTracks()[0]);
+      }
+
       const options = { mimeType: 'video/webm;codecs=vp9,opus' };
       try {
-        mediaRecorderRef.current = new MediaRecorder(stream, options);
+        mediaRecorderRef.current = new MediaRecorder(combinedStream, options);
       } catch (err) {
-        // Fallback to default
-        mediaRecorderRef.current = new MediaRecorder(stream);
+        mediaRecorderRef.current = new MediaRecorder(combinedStream);
       }
 
       mediaRecorderRef.current.ondataavailable = (e) => {
@@ -43,6 +78,7 @@ export function useCallRecorder() {
         setTimeout(() => {
            URL.revokeObjectURL(url);
            document.body.removeChild(a);
+           audioContext.close();
         }, 100);
       };
 
@@ -53,3 +89,4 @@ export function useCallRecorder() {
 
   return { isRecording, toggleRecording };
 }
+

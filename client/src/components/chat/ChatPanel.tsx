@@ -54,38 +54,73 @@ export default function ChatPanel({ isOpen, onClose, onOpenAppRequested }: ChatP
     return text.length > limit ? text.substring(0, limit) + '…' : text;
   };
 
+  // Helper: Play minimalist notification sound
+  const playNotificationSound = () => {
+    try {
+      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); // A5 note
+      oscillator.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.1);
+
+      gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + 0.1);
+      
+      setTimeout(() => audioCtx.close(), 200);
+    } catch (e) {
+      console.error('Sound play failed', e);
+    }
+  };
+
   // Receive files and messages
   useEffect(() => {
     const handleFile = ({ id, fileName, blob }: { id: string, fileName: string, blob: Blob }) => {
       const fileUrl = URL.createObjectURL(blob);
       const fileType = blob.type || (fileName.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? 'image/unknown' : fileName.match(/\.(mp4|mov|webm)$/i) ? 'video/unknown' : 'application/octet-stream');
       setMessages(prev => [...prev, { id, file: blob, fileName, fileUrl, fileType, isSelf: false }]);
-      if (!isOpen && onOpenAppRequested) {
-        // file_received doesn't carry `from`, so scan peers for best-effort name
-        const peerEntries = Array.from(engine.remotePeers.entries());
-        const senderName = peerEntries.length === 1
-          ? peerEntries[0][1].name
-          : `Peer ${id.substring(0, 4)}`;
-        toast(senderName, { 
-          description: smartTruncate(fileName),
-          position: 'bottom-right',
-          duration: 4000,
-          style: { maxWidth: '300px', overflow: 'hidden' },
-          action: { label: 'Open', onClick: onOpenAppRequested }
-        });
+      
+      // Robust check: Only notify if chat is closed
+      if (!isOpen) {
+        playNotificationSound();
+        if (onOpenAppRequested) {
+          const peerEntries = Array.from(engine.remotePeers.entries());
+          const senderName = peerEntries.length === 1
+            ? peerEntries[0][1].name
+            : `Peer ${id.substring(0, 4)}`;
+          toast(senderName, { 
+            description: smartTruncate(fileName),
+            position: 'bottom-right',
+            duration: 4000,
+            style: { maxWidth: '300px', overflow: 'hidden' },
+            action: { label: 'Open', onClick: onOpenAppRequested }
+          });
+        }
       }
     };
     const handleText = ({ id, text, from }: { id: string, text: string, from: string }) => {
       setMessages(prev => [...prev, { id, text, isSelf: false }]);
-      if (!isOpen && onOpenAppRequested) {
-        const senderName = getPeerName(from);
-        toast(senderName, {
-          description: smartTruncate(text),
-          position: 'bottom-right',
-          duration: 4000,
-          style: { maxWidth: '300px', overflow: 'hidden' },
-          action: { label: 'Open', onClick: onOpenAppRequested }
-        });
+      
+      // Robust check: Only notify if chat is closed
+      if (!isOpen) {
+        playNotificationSound();
+        if (onOpenAppRequested) {
+          const senderName = getPeerName(from);
+          toast(senderName, {
+            description: smartTruncate(text),
+            position: 'bottom-right',
+            duration: 4000,
+            style: { maxWidth: '300px', overflow: 'hidden' },
+            action: { label: 'Open', onClick: onOpenAppRequested }
+          });
+        }
       }
     };
 
@@ -96,7 +131,8 @@ export default function ChatPanel({ isOpen, onClose, onOpenAppRequested }: ChatP
       engine.off('file_received', handleFile as any);
       engine.off('text_received', handleText as any);
     };
-  }, [engine]);
+  }, [engine, isOpen, onOpenAppRequested]); // Added isOpen and onOpenAppRequested to deps for robustness
+
 
   const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();

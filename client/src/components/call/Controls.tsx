@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import BlurSlider from './BlurSlider';
@@ -40,6 +40,14 @@ export default function Controls({
   const [isMicOn, setIsMicOn] = useState(true);
   const [isVideoOn, setIsVideoOn] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
+  
+  // Auto-close emoji panel when main controls collapse
+  useEffect(() => {
+    if (!isExpanded) {
+      setShowEmojiPicker(false);
+    }
+  }, [isExpanded]);
+
 
   const handleToggleMic = () => { onToggleMic(); setIsMicOn(prev => !prev); };
   const handleToggleVideo = () => { onToggleVideo(); setIsVideoOn(prev => !prev); };
