@@ -308,20 +308,16 @@ function VideoTile({ stream, name, muted, isLocal, forceCover, isGiadarkitRoom, 
       if (stream) {
         console.log('[Attaching Stream to DOM]', stream.id, 'tracks:', stream.getTracks().map(t => `${t.kind}:${t.readyState}:${t.enabled}`).join(', '));
         videoRef.current.srcObject = stream;
-        if (stream.active) {
-          videoRef.current.play()
-            .then(() => console.log('[Video Playback Started]', stream.id))
-            .catch(e => {
-              if (e.name === 'AbortError') {
-                console.log('[Video Playback] Play request was interrupted, ignoring.');
-              } else {
-                console.warn('Video playback warning, retrying muted:', e);
-                if (videoRef.current) {
-                  videoRef.current.muted = true;
-                  videoRef.current.play().catch(() => {});
-                }
+        if (videoRef.current && stream.active) {
+          videoRef.current.play().catch(error => {
+            if (error.name !== 'AbortError') {
+              console.warn('Video playback warning, retrying muted:', error);
+              if (videoRef.current) {
+                videoRef.current.muted = true;
+                videoRef.current.play().catch(() => {});
               }
-            });
+            }
+          });
         }
       } else {
         videoRef.current.srcObject = null;

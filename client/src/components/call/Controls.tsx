@@ -220,29 +220,29 @@ export default function Controls({
         >
           {/* Left arm */}
           <motion.line
-            x1={4}
-            y1={5}
-            x2={20}
-            y2={5}
+            x1={Number(4) || 0}
+            y1={Number(5) || 0}
+            x2={Number(20) || 0}
+            y2={Number(isExpanded ? 2 : 5) || 0}
             stroke="white"
             strokeWidth="2.5"
             strokeLinecap="round"
             animate={{
-              y2: isExpanded ? 2 : 5,
+              y2: Number(isExpanded ? 2 : 5) || 0,
             }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           />
           {/* Right arm */}
           <motion.line
-            x1={20}
-            y1={5}
-            x2={36}
-            y2={5}
+            x1={Number(20) || 0}
+            y1={Number(isExpanded ? 2 : 5) || 0}
+            x2={Number(36) || 0}
+            y2={Number(5) || 0}
             stroke="white"
             strokeWidth="2.5"
             strokeLinecap="round"
             animate={{
-              y1: isExpanded ? 2 : 5,
+              y1: Number(isExpanded ? 2 : 5) || 0,
             }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           />
