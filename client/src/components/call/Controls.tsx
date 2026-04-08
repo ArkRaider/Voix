@@ -220,25 +220,24 @@ export default function Controls({
         >
           {/* Left arm */}
           <motion.line
-            x1="4"
-            y1="5"
-            x2="20"
-            y2="5"
+            x1={4}
+            y1={5}
+            x2={20}
+            y2={5}
             stroke="white"
             strokeWidth="2.5"
             strokeLinecap="round"
             animate={{
               y2: isExpanded ? 2 : 5,
-              rotate: isExpanded ? 0 : 0,
             }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           />
           {/* Right arm */}
           <motion.line
-            x1="20"
-            y1="5"
-            x2="36"
-            y2="5"
+            x1={20}
+            y1={5}
+            x2={36}
+            y2={5}
             stroke="white"
             strokeWidth="2.5"
             strokeLinecap="round"

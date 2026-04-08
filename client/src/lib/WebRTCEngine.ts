@@ -96,7 +96,15 @@ export class WebRTCEngine extends EventEmitter<WebRTCEvents> {
        }
     }, 5000);
 
-    this.socket = io(import.meta.env.VITE_SIGNALING_URL || `http://${window.location.hostname}:3001`);
+    const socketUrl = import.meta.env.VITE_SIGNALING_URL || 'https://voix-backend-y0m9.onrender.com';
+    console.log('Final Socket Target:', socketUrl);
+
+    this.socket = io(socketUrl, {
+      transports: ['websocket'],
+      forceNew: true,
+      reconnection: true,
+      reconnectionAttempts: 5
+    });
     
     this.socket.on('connect', () => {
       clearTimeout(initTimeout);

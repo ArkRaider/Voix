@@ -124,7 +124,7 @@ export default function VideoGrid({ localName, localStream, peers = new Map(), p
         {layoutMode === 'cinematic' && (
           <div ref={constraintsRef} className="absolute inset-0 w-full h-full z-0 pointer-events-none p-4 md:p-6 lg:p-8">
             <motion.div layoutId={`video-${mainStageId}`} className="absolute inset-4 md:inset-6 lg:inset-8 overflow-hidden z-0 pointer-events-auto bg-black rounded-[40px] shadow-2xl">
-               <VideoTile stream={mainStageStream} name={mainStageName} muted={mainStageId === 'local'} isLocal={mainStageId === 'local'} forceCover isGiadarkitRoom={isGiadarkitRoom} isCinematicMain isCameraOff={mainStageId === 'local' ? !isLocalCameraOn : peerCameraStates.get(mainStageId) === false} peerId={mainStageId} />
+               <VideoTile stream={mainStageStream} name={mainStageName} muted={mainStageId === 'local'} isLocal={mainStageId === 'local'} isGiadarkitRoom={isGiadarkitRoom} isCinematicMain isCameraOff={mainStageId === 'local' ? !isLocalCameraOn : peerCameraStates.get(mainStageId) === false} peerId={mainStageId} />
                <div className="absolute top-6 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/20 backdrop-blur-md rounded-full border border-white/5 text-white/60 text-[11px] font-light z-10 pointer-events-none">
                   {mainStageName}
                </div>
@@ -308,15 +308,21 @@ function VideoTile({ stream, name, muted, isLocal, forceCover, isGiadarkitRoom, 
       if (stream) {
         console.log('[Attaching Stream to DOM]', stream.id, 'tracks:', stream.getTracks().map(t => `${t.kind}:${t.readyState}:${t.enabled}`).join(', '));
         videoRef.current.srcObject = stream;
-        videoRef.current.play()
-          .then(() => console.log('[Video Playback Started]', stream.id))
-          .catch(e => {
-            console.warn('Video playback warning, retrying muted:', e);
-            if (videoRef.current) {
-              videoRef.current.muted = true;
-              videoRef.current.play().catch(() => {});
-            }
-          });
+        if (stream.active) {
+          videoRef.current.play()
+            .then(() => console.log('[Video Playback Started]', stream.id))
+            .catch(e => {
+              if (e.name === 'AbortError') {
+                console.log('[Video Playback] Play request was interrupted, ignoring.');
+              } else {
+                console.warn('Video playback warning, retrying muted:', e);
+                if (videoRef.current) {
+                  videoRef.current.muted = true;
+                  videoRef.current.play().catch(() => {});
+                }
+              }
+            });
+        }
       } else {
         videoRef.current.srcObject = null;
       }
@@ -330,7 +336,11 @@ function VideoTile({ stream, name, muted, isLocal, forceCover, isGiadarkitRoom, 
       // Camera just turned ON — force re-attach the stream and play
       console.log('[Camera ON — re-binding stream]', stream.id);
       videoRef.current.srcObject = stream;
-      videoRef.current.play().catch(() => {});
+      if (stream.active) {
+        videoRef.current.play().catch(e => {
+          if (e.name !== 'AbortError') console.error('Camera ON play error:', e);
+        });
+      }
     }
   }, [isCameraOff, stream]);
 
@@ -365,7 +375,7 @@ function VideoTile({ stream, name, muted, isLocal, forceCover, isGiadarkitRoom, 
       {/* Video element — always in DOM, never display:none (browsers pause hidden streams) */}
       <video  
         ref={videoRef} 
-        className={`w-full h-full ${isCinematicMain ? '' : 'rounded-3xl'} ${isLocal && !isScreenShare ? '-scale-x-100' : ''} ${forceCover ? 'object-cover' : 'object-contain md:object-cover'} transition-opacity duration-300 ${showVideo ? 'opacity-100' : 'opacity-0'}`} 
+        className={`w-full h-full ${isCinematicMain ? '' : 'rounded-3xl'} ${isLocal && !isScreenShare ? '-scale-x-100' : ''} ${isCinematicMain ? 'object-contain' : (forceCover ? 'object-cover' : 'object-contain md:object-cover')} transition-opacity duration-300 ${showVideo ? 'opacity-100' : 'opacity-0'}`} 
         autoPlay 
         muted={muted}
         playsInline
