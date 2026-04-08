@@ -10,12 +10,14 @@ app.use(cors());
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
+  path: '/socket.io/',
   cors: {
-    origin: ["https://voix-r8dv.vercel.app", "http://localhost:5173", "http://localhost:3000"],
+    origin: true,
     methods: ["GET", "POST"],
     credentials: true
   },
-  transports: ['websocket', 'polling']
+  transports: ['websocket', 'polling'],
+  allowEIO3: true
 });
 
 // Room registry: Map<roomId, Map<socketId, { userId, displayName }>>
