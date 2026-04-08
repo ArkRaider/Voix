@@ -96,15 +96,14 @@ export class WebRTCEngine extends EventEmitter<WebRTCEvents> {
        }
     }, 5000);
 
-    const socketUrl = import.meta.env.VITE_SIGNALING_URL || 'https://voix-backend-y0m9.onrender.com';
+    const socketUrl = 'https://voix-backend-y0m9.onrender.com';
     console.log('Final Socket Target:', socketUrl);
 
     this.socket = io(socketUrl, {
-      path: '/socket.io/',
       transports: ['websocket'],
-      secure: true,
+      upgrade: false,
       reconnection: true,
-      rejectUnauthorized: false,
+      reconnectionAttempts: 10,
       timeout: 45000
     });
     
