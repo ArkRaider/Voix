@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>voix· Active Call</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#e5e1e4",
+                        "secondary-fixed": "#e2e1eb",
+                        "on-primary-container": "#006649",
+                        "surface-container-low": "#1c1b1d",
+                        "inverse-primary": "#006c4e",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#670211",
+                        "surface-tint": "#62dcad",
+                        "on-tertiary-container": "#a23135",
+                        "surface-container-highest": "#353437",
+                        "tertiary": "#ffe9e7",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e5e1e4",
+                        "on-tertiary-fixed-variant": "#881d24",
+                        "surface-bright": "#39393b",
+                        "primary-container": "#6ee7b7",
+                        "surface-container-lowest": "#0e0e10",
+                        "on-primary-fixed-variant": "#00513a",
+                        "on-primary-fixed": "#002115",
+                        "on-tertiary-fixed": "#410006",
+                        "secondary": "#c6c6cf",
+                        "secondary-fixed-dim": "#c6c6cf",
+                        "surface-container": "#201f22",
+                        "on-surface-variant": "#bccac1",
+                        "inverse-on-surface": "#313032",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#b4b4bd",
+                        "on-secondary-fixed": "#1a1b22",
+                        "surface-dim": "#131315",
+                        "tertiary-fixed-dim": "#ffb3b0",
+                        "surface-variant": "#353437",
+                        "primary-fixed-dim": "#62dcad",
+                        "secondary-container": "#45464e",
+                        "primary": "#aaffd8",
+                        "tertiary-fixed": "#ffdad8",
+                        "on-secondary-fixed-variant": "#45464e",
+                        "on-primary": "#003827",
+                        "tertiary-container": "#ffc3c0",
+                        "background": "#09090b",
+                        "surface": "#111113",
+                        "on-background": "#e5e1e4",
+                        "outline-variant": "#3d4a43",
+                        "on-error": "#690005",
+                        "on-secondary": "#2f3037",
+                        "outline": "#86948c",
+                        "surface-container-high": "#2a2a2c",
+                        "primary-fixed": "#80f9c8"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "sans": ["Geist", "Inter", "sans-serif"],
+                        "mono": ["Geist Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .speaking-glow {
+            box-shadow: 0 0 0 2px rgba(110, 231, 183, 0.15);
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-sans selection:bg-primary-container selection:text-on-primary-container overflow-hidden h-screen w-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 h-[48px] glass-panel bg-[#09090b]/75 border-b border-white/[0.06] flex justify-between items-center px-6">
+<div class="flex items-center gap-4">
+<span class="text-[20px] font-medium text-white tracking-tighter">voix·</span>
+<div class="bg-surface px-3 py-1 rounded-full border border-white/[0.06] flex items-center gap-2">
+<span class="font-mono text-[11px] tracking-widest text-[#a1a1aa] uppercase">xk3m9q</span>
+<span class="material-symbols-outlined text-[14px] text-[#71717a] cursor-pointer hover:text-white transition-colors">content_copy</span>
+</div>
+</div>
+<div class="flex items-center gap-3 text-[13px] text-[#71717a]">
+<span class="font-medium">2 people</span>
+<span class="text-[#3f3f46]">·</span>
+<span class="font-mono text-white">14:22</span>
+<div class="h-4 w-[1px] bg-white/[0.06] mx-1"></div>
+<button class="hover:bg-[#27272a] p-1.5 rounded-lg transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-[20px] text-[#a1a1aa] hover:text-white" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Video Grid Canvas -->
+<main class="flex-1 w-full pt-[64px] pb-[88px] px-4 flex items-center justify-center gap-[12px]">
+<!-- Participant 1: Active Speaker -->
+<div class="relative flex-1 aspect-video bg-surface rounded-3xl border border-[#6ee7b7]/35 speaking-glow overflow-hidden group">
+<img alt="" class="w-full h-full object-cover" data-alt="Close-up portrait of a man with short hair in a modern minimalist home office with soft cinematic lighting and green plants in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoTq4QbfgR45zfIHvg86r-4maxz61Q7yGRZk5cgWgMRnQ6Z0mBFFr46H70XDm-H1iY0aZpkaV4FoJwKZ_uVJirI7Ej_U30VptLIeGrNKcsrZY7RCqA7HV6Xb1bcbyJ8E8dbgdJy9ZTR6duR7D4psSrfvenfC9ry9OwDP2U2IYjafGuGCGSVh0fX33ejaL1MIgOKuKL8254k6ktapkoPUjUoDqo4-ItQhwGArsD99b5MCa2nDVE1vpSisliQvH2qnDiLAKSefVUnFw-"/>
+<!-- Bottom Left Label -->
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<div class="bg-[#09090b]/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/[0.03]">
+<span class="text-[13px] text-white font-medium">Julian Casablancas</span>
+</div>
+<div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(110,231,183,0.6)]"></div>
+</div>
+</div>
+<!-- Participant 2: Camera Off -->
+<div class="relative flex-1 aspect-video bg-surface rounded-3xl border border-white/[0.06] flex flex-col items-center justify-center gap-4 overflow-hidden">
+<div class="w-[72px] h-[72px] rounded-full bg-emerald-400/10 flex items-center justify-center border border-emerald-400/20">
+<span class="text-emerald-400 text-2xl font-medium tracking-tight">EN</span>
+</div>
+<span class="text-[14px] text-[#a1a1aa] font-medium">Elena Nowak</span>
+<!-- Bottom Left Label -->
+<div class="absolute bottom-4 left-4 bg-[#09090b]/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/[0.03]">
+<span class="text-[13px] text-white font-medium">Elena Nowak</span>
+</div>
+<!-- Bottom Right Mute Indicator -->
+<div class="absolute bottom-4 right-4 bg-[#f87171]/15 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-[#f87171]" data-icon="mic_off">mic_off</span>
+</div>
+</div>
+</main>
+<!-- Self-View PIP -->
+<div class="fixed bottom-28 right-6 w-[180px] aspect-video rounded-xl border-2 border-white/20 shadow-2xl overflow-hidden bg-surface-container-lowest z-40 group cursor-move">
+<img alt="" class="w-full h-full object-cover" data-alt="Young professional woman in a bright home studio with soft daylight, looking at the camera with a neutral expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrGFom2a0JHVIvcjYOMZGPiolkrU8VuV0kbmi7PWTBR5KXvnbu_YcpYf3yvd4Hvvtji-wOAycetqzokklrseGZqp5_d6MgUr5m2n3J3JzNcDQyuP2hhTUH20rwVJ8GRq9dBsaY4bWPwmcAmPoIhKSmQAAdKiwKjKTFFvfHeL_759vYQ_2MQnYf2uHUxa8tsO4gHReqO1AYeDCHumnD08PB5jd2_KCKvcnZLgDz2zq60Q1zCwMxbal_CxQVcuSFdB7r3l2fBWmLn_6i"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute bottom-2 left-2 bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] text-white">You</div>
+</div>
+<!-- BottomNavBar (Call Controls) -->
+<nav class="fixed bottom-[20px] left-1/2 -translate-x-1/2 z-50 glass-panel bg-[#18181b]/90 border border-white/[0.03] shadow-[0_-16px_48px_rgba(0,0,0,0.7)] rounded-full px-4 py-2.5 flex items-center gap-1.5">
+<!-- Mic Button -->
+<button class="relative group p-2.5 rounded-full hover:bg-[#27272a] transition-all duration-300 active:scale-90 text-[#a1a1aa] hover:text-white">
+<span class="material-symbols-outlined text-[24px]" data-icon="mic">mic</span>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#18181b] text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Mute (⌘+D)</div>
+</button>
+<!-- Camera Button -->
+<button class="relative group p-2.5 rounded-full hover:bg-[#27272a] transition-all duration-300 active:scale-90 text-[#a1a1aa] hover:text-white">
+<span class="material-symbols-outlined text-[24px]" data-icon="videocam">videocam</span>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#18181b] text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Stop Camera (⌘+E)</div>
+</button>
+<div class="w-[1px] h-6 bg-white/[0.06] mx-1"></div>
+<!-- Screen Share Button -->
+<button class="relative group p-2.5 rounded-full hover:bg-[#27272a] transition-all duration-300 active:scale-90 text-emerald-400">
+<span class="material-symbols-outlined text-[24px]" data-icon="present_to_all">present_to_all</span>
+<div class="absolute top-1 right-1 w-2 h-2 bg-emerald-400 rounded-full border-2 border-[#18181b]"></div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#18181b] text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">You are sharing</div>
+</button>
+<!-- Chat Button -->
+<button class="relative group p-2.5 rounded-full hover:bg-[#27272a] transition-all duration-300 active:scale-90 text-[#a1a1aa] hover:text-white">
+<span class="material-symbols-outlined text-[24px]" data-icon="chat">chat</span>
+<div class="absolute top-1.5 right-1.5 w-4 h-4 bg-emerald-400 text-[#003827] text-[9px] font-bold rounded-full flex items-center justify-center">2</div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#18181b] text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Chat</div>
+</button>
+<!-- Participants Button -->
+<button class="relative group p-2.5 rounded-full hover:bg-[#27272a] transition-all duration-300 active:scale-90 text-[#a1a1aa] hover:text-white">
+<span class="material-symbols-outlined text-[24px]" data-icon="group">group</span>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#18181b] text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Participants</div>
+</button>
+<!-- Emoji Button -->
+<button class="relative group p-2.5 rounded-full hover:bg-[#27272a] transition-all duration-300 active:scale-90 text-[#a1a1aa] hover:text-white">
+<span class="material-symbols-outlined text-[24px]" data-icon="mood">mood</span>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#18181b] text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Reactions</div>
+</button>
+<div class="w-[1px] h-6 bg-white/[0.06] mx-1"></div>
+<!-- Leave Button -->
+<button class="group bg-red-500/10 hover:bg-red-500 transition-all duration-300 active:scale-95 px-5 py-2 rounded-full flex items-center gap-2 ml-1">
+<span class="material-symbols-outlined text-[20px] text-red-400 group-hover:text-white" data-icon="call_end">call_end</span>
+<span class="text-[12px] font-medium text-red-400 group-hover:text-white">Leave</span>
+</button>
+</nav>
+<!-- Background Atmospheric Elements -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-[-1]">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-emerald-500/3 blur-[100px] rounded-full"></div>
+</div>
+</body></html>

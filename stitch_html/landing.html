@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>voix· | Secure Private Calls</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Using Geist and Geist Mono via CDN for brand accuracy -->
+<link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-mono/style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#e5e1e4",
+                        "secondary-fixed": "#e2e1eb",
+                        "on-primary-container": "#006649",
+                        "surface-container-low": "#1c1b1d",
+                        "inverse-primary": "#006c4e",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#670211",
+                        "surface-tint": "#62dcad",
+                        "on-tertiary-container": "#a23135",
+                        "surface-container-highest": "#353437",
+                        "tertiary": "#ffe9e7",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e5e1e4",
+                        "on-tertiary-fixed-variant": "#881d24",
+                        "surface-bright": "#39393b",
+                        "primary-container": "#6ee7b7",
+                        "surface-container-lowest": "#0e0e10",
+                        "on-primary-fixed-variant": "#00513a",
+                        "on-primary-fixed": "#002115",
+                        "on-tertiary-fixed": "#410006",
+                        "secondary": "#c6c6cf",
+                        "secondary-fixed-dim": "#c6c6cf",
+                        "surface-container": "#201f22",
+                        "on-surface-variant": "#bccac1",
+                        "inverse-on-surface": "#313032",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#b4b4bd",
+                        "on-secondary-fixed": "#1a1b22",
+                        "surface-dim": "#131315",
+                        "tertiary-fixed-dim": "#ffb3b0",
+                        "surface-variant": "#353437",
+                        "primary-fixed-dim": "#62dcad",
+                        "secondary-container": "#45464e",
+                        "primary": "#aaffd8",
+                        "tertiary-fixed": "#ffdad8",
+                        "on-secondary-fixed-variant": "#45464e",
+                        "on-primary": "#003827",
+                        "tertiary-container": "#ffc3c0",
+                        "background": "#131315",
+                        "surface": "#131315",
+                        "on-background": "#e5e1e4",
+                        "outline-variant": "#3d4a43",
+                        "on-error": "#690005",
+                        "on-secondary": "#2f3037",
+                        "outline": "#86948c",
+                        "surface-container-high": "#2a2a2c",
+                        "primary-fixed": "#80f9c8"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Geist", "Inter", "sans-serif"],
+                        "body": ["Geist", "Inter", "sans-serif"],
+                        "label": ["Geist", "Inter", "sans-serif"],
+                        "mono": ["Geist Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #09090b;
+            color: #fafafa;
+            font-family: 'Geist', 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        .bloom {
+            background: radial-gradient(circle at top center, rgba(110, 231, 183, 0.07) 0%, rgba(9, 9, 11, 0) 60%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 18px;
+        }
+        .ghost-border {
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center bloom">
+<!-- TopAppBar Semantic Shell Suppression: suppressed as per Task (Landing/Linear journey) -->
+<main class="w-full max-w-[400px] px-6 flex flex-col items-center text-center space-y-10">
+<!-- Brand Section -->
+<div class="space-y-2">
+<h1 class="text-[28px] font-medium tracking-[-0.04em] text-[#fafafa] flex items-center justify-center">
+                voix<span class="text-[#6ee7b7]">·</span>
+</h1>
+<p class="text-[14px] text-[#71717a] font-normal tracking-tight">
+                Clear calls. Nothing more.
+            </p>
+</div>
+<!-- Action Grid (Asymmetric Layout for Premium Feel) -->
+<div class="w-full space-y-8">
+<!-- Primary Action -->
+<button class="w-full h-[44px] bg-[#6ee7b7] text-[#09090b] font-medium text-[14px] rounded-[10px] hover:opacity-90 transition-opacity">
+                Create a room
+            </button>
+<!-- Secondary Actions -->
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="h-[1px] flex-1 bg-[#111113]"></div>
+<span class="text-[12px] text-[#71717a] whitespace-nowrap">or join existing</span>
+<div class="h-[1px] flex-1 bg-[#111113]"></div>
+</div>
+<div class="flex gap-2">
+<input class="flex-1 h-[44px] bg-[#111113] border-none text-white font-mono text-[14px] tracking-[0.08em] px-4 rounded-[8px] focus:ring-1 focus:ring-emerald-400/30 placeholder:text-[#3f3f46]" placeholder="Room code" type="text"/>
+<button class="px-6 h-[44px] ghost-border text-[#fafafa] text-[14px] font-medium rounded-[8px] hover:bg-white/5 transition-colors">
+                        Join
+                    </button>
+</div>
+</div>
+<!-- Identity Input Section (Reveals) -->
+<div class="space-y-3 text-left pt-2">
+<label class="text-[12px] text-[#71717a] pl-1">Your name</label>
+<div class="relative">
+<input class="w-full h-[44px] bg-[#111113] border-none text-[#fafafa] text-[14px] px-4 rounded-[8px] focus:ring-1 focus:ring-emerald-400/30" type="text" value="Anonymous"/>
+</div>
+<p class="text-[11px] text-[#52525b] pl-1">Visible to others in the call</p>
+</div>
+</div>
+</main>
+<!-- Footer Security Badge -->
+<footer class="fixed bottom-[28px] w-full flex flex-col items-center justify-center gap-6">
+<!-- Subtle Visual Asset -->
+<div class="relative w-full max-w-[120px] h-[1px] bg-gradient-to-r from-transparent via-[#27272a] to-transparent"></div>
+<div class="flex items-center gap-2 text-[#52525b]">
+<span class="material-symbols-outlined text-[14px]" style="font-size: 14px;">lock</span>
+<span class="text-[12px] font-normal tracking-tight">End-to-end encrypted · No account required</span>
+</div>
+</footer>
+<!-- BottomNavBar Suppression Check: Suppressed on Landing/Transactional Screen -->
+</body></html>

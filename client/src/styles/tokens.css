@@ -1,0 +1,54 @@
+:root {
+  /* Backgrounds — layered depth system */
+  --bg-base:      #09090b;   /* true dark base */
+  --bg-surface:   #111113;   /* cards, panels */
+  --bg-overlay:   #18181b;   /* modals, popovers */
+  --bg-subtle:    #27272a;   /* hover states */
+  --bg-muted:     #3f3f46;   /* disabled, borders */
+
+  /* Text */
+  --text-primary:   #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-tertiary:  #71717a;
+  --text-disabled:  #52525b;
+
+  /* Accent — one color rules everything */
+  --accent:         #6ee7b7;   /* emerald-300 — calm, not aggressive */
+  --accent-dim:     #34d399;
+  --accent-muted:   rgba(110, 231, 183, 0.12);
+  --accent-border:  rgba(110, 231, 183, 0.25);
+
+  /* Semantic */
+  --red:    #f87171;
+  --red-bg: rgba(248, 113, 113, 0.1);
+  --amber:  #fbbf24;
+
+  /* Borders */
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong:  rgba(255, 255, 255, 0.18);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.7);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 350ms;
+  
+  /* STITCH specific overrides */
+  --stitch-on-surface: #e5e1e4;
+  --stitch-surface-lowest: #0e0e10;
+  --stitch-surface: #111113;
+}

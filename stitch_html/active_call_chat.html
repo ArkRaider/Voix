@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Geist+Mono:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#e5e1e4",
+                    "secondary-fixed": "#e2e1eb",
+                    "on-primary-container": "#006649",
+                    "surface-container-low": "#1c1b1d",
+                    "inverse-primary": "#006c4e",
+                    "error-container": "#93000a",
+                    "on-tertiary": "#670211",
+                    "surface-tint": "#62dcad",
+                    "on-tertiary-container": "#a23135",
+                    "surface-container-highest": "#353437",
+                    "tertiary": "#ffe9e7",
+                    "on-error-container": "#ffdad6",
+                    "inverse-surface": "#e5e1e4",
+                    "on-tertiary-fixed-variant": "#881d24",
+                    "surface-bright": "#39393b",
+                    "primary-container": "#6ee7b7",
+                    "surface-container-lowest": "#0e0e10",
+                    "on-primary-fixed-variant": "#00513a",
+                    "on-primary-fixed": "#002115",
+                    "on-tertiary-fixed": "#410006",
+                    "secondary": "#c6c6cf",
+                    "secondary-fixed-dim": "#c6c6cf",
+                    "surface-container": "#201f22",
+                    "on-surface-variant": "#bccac1",
+                    "inverse-on-surface": "#313032",
+                    "error": "#ffb4ab",
+                    "on-secondary-container": "#b4b4bd",
+                    "on-secondary-fixed": "#1a1b22",
+                    "surface-dim": "#131315",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "surface-variant": "#353437",
+                    "primary-fixed-dim": "#62dcad",
+                    "secondary-container": "#45464e",
+                    "primary": "#aaffd8",
+                    "tertiary-fixed": "#ffdad8",
+                    "on-secondary-fixed-variant": "#45464e",
+                    "on-primary": "#003827",
+                    "tertiary-container": "#ffc3c0",
+                    "background": "#09090b",
+                    "surface": "#131315",
+                    "on-background": "#e5e1e4",
+                    "outline-variant": "#3d4a43",
+                    "on-error": "#690005",
+                    "on-secondary": "#2f3037",
+                    "outline": "#86948c",
+                    "surface-container-high": "#2a2a2c",
+                    "primary-fixed": "#80f9c8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Geist", "Inter", "sans-serif"],
+                    "body": ["Geist", "Inter", "sans-serif"],
+                    "label": ["Geist Mono", "monospace"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; background-color: #09090b; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-panel { background: rgba(24, 24, 27, 0.8); backdrop-filter: blur(24px); }
+        .ghost-border { border: 1px solid rgba(255, 255, 255, 0.06); }
+        .message-gradient { background: linear-gradient(135deg, rgba(110, 231, 183, 0.1) 0%, rgba(110, 231, 183, 0.05) 100%); }
+    </style>
+</head>
+<body class="text-on-surface overflow-hidden h-screen flex flex-col">
+<!-- Top Navigation Anchor (Shared Component: TopAppBar) -->
+<header class="bg-[#09090b]/75 backdrop-blur-md text-emerald-300 font-['Geist'] font-medium tracking-tight text-sm fixed top-0 left-0 w-full z-40 flex justify-between items-center px-6 py-4">
+<div class="text-2xl font-medium text-white tracking-tighter">voix<span class="text-emerald-400">·</span></div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1 rounded-full border border-white/5">
+<span class="material-symbols-outlined text-xs text-emerald-400" style="font-variation-settings: 'FILL' 1;">circle</span>
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">00:42:18</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#a1a1aa] hover:bg-[#27272a] transition-all duration-300 p-2 rounded-full scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 flex pt-16 relative">
+<!-- Main Canvas: Video Grid (The Sanctuary) -->
+<div class="flex-1 p-6 flex flex-col gap-4 transition-all duration-500 mr-80">
+<!-- Asymmetric Grid Layout -->
+<div class="grid grid-cols-12 grid-rows-2 gap-4 h-full">
+<!-- Main Participant -->
+<div class="col-span-8 row-span-2 relative rounded-2xl overflow-hidden bg-surface-container-lowest group">
+<img class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-[2000ms]" data-alt="Cinematic close-up portrait of a man in a dark studio with soft teal rim lighting and deep shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL763fbCDFIrzfzcMlytXVVM85-WuN1ynoJg60fdfng0OnckZDygh9JtzfZhqjoR04b0GQofSkk2RAlvv4vym_4HJjQObj6QTtLx6OjrxBRwmIwo3LVtCyGQY5sdDvByz3n2xDn6CJqkbQ23LXk53PQ8JvHrLxxPWmLfURqhSXbwvPNkIZknyshvrl1mR2-ZwjQYO9ldJd99XgnFOoimyUU7guWr000qPGDlybT3-Hi0iIdFsAKFMF1bHv-29BiNPRAGAGkFEpwyxE"/>
+<div class="absolute bottom-6 left-6 flex items-center gap-3">
+<div class="glass-panel px-4 py-2 rounded-full border border-white/10">
+<span class="text-sm font-medium text-white">Julian Casablancas</span>
+</div>
+</div>
+<!-- Emoji Reaction Overlay -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+<div class="w-16 h-16 bg-white/10 backdrop-blur-xl rounded-full flex items-center justify-center text-3xl animate-bounce shadow-2xl border border-white/20">
+                            🔥
+                        </div>
+</div>
+</div>
+<!-- Secondary Participant 1 -->
+<div class="col-span-4 row-span-1 relative rounded-2xl overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Professional woman in a dark workspace with ambient green keyboard glow reflecting on her face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj-FEhffcQ2rAIbmyRzfTIw82_lwwRQM9suf1HgJy8SYJce1IDeOoojF-il4KI-jaVzFdYJOjwFF_pyHNVm1Q6-tKazwOTO2WOoZCTjJMMa1lzkwClmsEljTJFjjkUtqBgMzc_7ukZuiU50qdZcruK6-1W5mQjdNVfwjLojwUpqH_6Z2vwDiNntiMaz62n2MCmzTrEzu1LEcJbBVTXMaZFd0jvApdi01alN0rXHlX1UJt2FQt2OZqkFKP_3zVbRSC4dP-7Mb48wb72"/>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<div class="glass-panel px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-emerald-400">mic</span>
+<span class="text-xs font-medium text-white">Sarah Chen</span>
+</div>
+</div>
+</div>
+<!-- Secondary Participant 2 (Self View) -->
+<div class="col-span-4 row-span-1 relative rounded-2xl overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Self-view portrait of a man with minimalist room background in low light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZuuaYRzue_Y6htm4uR1TlxL14md1XHIAkdBHJ5B9NUuhoCbJvRbQCT5lXTW-IJu51rHo8VspQgtqzkkMtioXiunzFzriG5mgnp-sXgKHgcZlbV8FtKxK_VSUZJFNcaSBaNnuxFZB93TEby4NI0R5nF2HBeflkxWHbREwhDw4zHSkotEatEACb2Wj7pOpU2WGvF5HcgcrOHcvp64JGz9AklEu22UwckyHDUjPSqwRnldaZb5YYVwlAvb5Le9RQoMxTr6yO5o76ZGob"/>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<div class="glass-panel px-3 py-1.5 rounded-full border border-white/10">
+<span class="text-xs font-medium text-white">You</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side Panel: Chat (Shared Component: SideNavBar context) -->
+<aside class="fixed right-0 top-0 h-full w-80 bg-[#111113] border-l border-white/5 flex flex-col z-50 shadow-2xl">
+<!-- Chat Header -->
+<div class="h-[52px] flex items-center justify-between px-4 border-b border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-400 text-lg">chat</span>
+<h2 class="text-[14px] font-medium text-[#fafafa] tracking-tight">Messages</h2>
+</div>
+<button class="text-[#a1a1aa] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+<!-- Message List -->
+<div class="flex-1 overflow-y-auto p-4 space-y-6 no-scrollbar">
+<!-- Date/System Separator -->
+<div class="flex justify-center">
+<span class="text-[10px] font-label text-[#52525b] uppercase tracking-widest">End-to-end encrypted</span>
+</div>
+<!-- Remote Message -->
+<div class="flex flex-col gap-2 max-w-[85%]">
+<div class="bg-[#18181b] rounded-2xl rounded-tl-none p-3 border border-white/5">
+<p class="text-[14px] text-on-surface leading-relaxed">Did you see the latest wireframes I uploaded to the board?</p>
+</div>
+<div class="flex items-center gap-2 px-1">
+<span class="text-[10px] font-medium text-[#a1a1aa]">Sarah Chen</span>
+<span class="text-[11px] font-label text-[#52525b]">10:41 AM</span>
+</div>
+</div>
+<!-- Own Message with Image -->
+<div class="flex flex-col items-end gap-2 ml-auto max-w-[85%]">
+<div class="message-gradient rounded-2xl rounded-tr-none border border-emerald-400/10 overflow-hidden">
+<div class="p-1">
+<img class="w-full aspect-video object-cover rounded-lg" data-alt="Abstract 3D digital render with fluid obsidian-like shapes and vibrant emerald light streaks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUCFqdsfmasI2mN8caqTW1DfLzWd4IhJstMLqR05AbY7tzFrNzrZ-1POxaAs8qlSVA6Lp8O8av_QVQ1-LWhTYnDrKuihxhsmmOQei9hoKKbHLLerTcEePr0oLeLdk9xR9BYZzAbY7PjGT4WaUbJXJZwUc5i6L9Gtxq_gqqx2AfSd45rqNGk_dX2pWQcDlZH3SA6kywzCjQ_iAikgVwFBMSzJmAZGPxPmRDo6peehsXe_PhbFnFH_X-6f9fMR1QZiOxGU5LsQwOX0Dh"/>
+</div>
+<div class="p-3 pt-1 flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-400 text-sm">image</span>
+<span class="text-[11px] font-label text-emerald-400/80">concept_v4.png</span>
+</div>
+<p class="text-[14px] text-[#fafafa] leading-relaxed">Just sent it over. The lighting fits the "Invisible Presence" vibe perfectly.</p>
+</div>
+</div>
+<div class="flex items-center gap-2 px-1">
+<span class="text-[11px] font-label text-[#52525b]">10:42 AM</span>
+<span class="material-symbols-outlined text-xs text-emerald-400" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+<!-- Remote Message with Reaction -->
+<div class="flex flex-col gap-2 max-w-[85%]">
+<div class="bg-[#18181b] rounded-2xl rounded-tl-none p-3 border border-white/5 relative">
+<p class="text-[14px] text-on-surface leading-relaxed">That looks incredible. Let's run with it.</p>
+<!-- Reaction Pill -->
+<div class="absolute -bottom-3 -right-2 bg-[#27272a] border border-white/10 rounded-full px-2 py-0.5 flex items-center gap-1 scale-90">
+<span class="text-xs">🔥</span>
+<span class="text-[10px] font-medium text-white">1</span>
+</div>
+</div>
+<div class="flex items-center gap-2 px-1">
+<span class="text-[10px] font-medium text-[#a1a1aa]">Julian Casablancas</span>
+<span class="text-[11px] font-label text-[#52525b]">10:43 AM</span>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-4 bg-[#111113] border-t border-white/5">
+<div class="flex items-end gap-2 bg-[#18181b] rounded-2xl p-2 border border-white/5">
+<div class="flex flex-col gap-2 mb-1">
+<button class="p-2 text-[#a1a1aa] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">attach_file</span>
+</button>
+</div>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-[14px] text-[#fafafa] placeholder-[#52525b] py-2 resize-none max-h-32" placeholder="Send a message..."></textarea>
+<div class="flex items-center gap-1 mb-1">
+<button class="p-2 text-[#a1a1aa] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">mood</span>
+</button>
+<button class="w-10 h-10 bg-emerald-400 rounded-full flex items-center justify-center text-[#003827] shadow-lg shadow-emerald-500/10 hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Floating Control Bar (Shared Component: BottomNavBar) -->
+<nav class="fixed bottom-8 left-1/2 -translate-x-1/2 glass-panel rounded-full px-6 py-4 flex items-center gap-8 z-50 border border-white/5 shadow-[0_-16px_48px_rgba(0,0,0,0.7)]">
+<button class="bg-emerald-400/10 text-emerald-400 rounded-full p-3 flex flex-col items-center gap-1 animate-spring transition-all">
+<span class="material-symbols-outlined">mic</span>
+<span class="text-[10px] font-medium font-['Geist']">Mic</span>
+</button>
+<button class="text-[#a1a1aa] p-3 hover:text-white transition-colors flex flex-col items-center gap-1">
+<span class="material-symbols-outlined">videocam</span>
+<span class="text-[10px] font-medium font-['Geist']">Camera</span>
+</button>
+<button class="text-[#a1a1aa] p-3 hover:text-white transition-colors flex flex-col items-center gap-1">
+<span class="material-symbols-outlined">flip_camera_ios</span>
+<span class="text-[10px] font-medium font-['Geist']">Flip</span>
+</button>
+<button class="text-white bg-white/5 rounded-full p-3 flex flex-col items-center gap-1">
+<span class="material-symbols-outlined">chat</span>
+<span class="text-[10px] font-medium font-['Geist']">Chat</span>
+</button>
+<button class="text-[#a1a1aa] p-3 hover:text-white transition-colors flex flex-col items-center gap-1">
+<span class="material-symbols-outlined">mood</span>
+<span class="text-[10px] font-medium font-['Geist']">Emoji</span>
+</button>
+<div class="w-px h-8 bg-white/10 mx-2"></div>
+<button class="bg-[#f87171] text-[#410006] rounded-full p-3 flex flex-col items-center gap-1 hover:bg-[#ef4444] transition-colors group">
+<span class="material-symbols-outlined">call_end</span>
+<span class="text-[10px] font-medium font-['Geist']">Leave</span>
+</button>
+</nav>
+</main>
+<!-- Background Atmospheric Elements -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full"></div>
+</div>
+</body></html>
